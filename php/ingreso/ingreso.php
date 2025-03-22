@@ -38,25 +38,26 @@
 					<tr>
 						<td><?php echo $fila['id'];         ?></td>
 						
-						<td>
+						<td style="background-color: <?php echo ($fila['estado'] == 'Presente') ? '#ed969e' : ''; ?>;">
 							<a href="php/ingreso/guardar.php?accion=editar&id=<?php echo $fila['id']; ?>">
-								<?php echo $fila['cc_invitado']. "<br><hr>" . $fila['invitado']  ;    ?></td>						
+								<?php echo $fila['cc_invitado']. "<br><hr>" . $fila['invitado']; ?>
 							</a>
-						<td>
+						</td>
+						<td style="background-color: <?php echo ($fila['est_inv1'] == 'Presente') ? '#ed969e' : ''; ?>;">
 							<a href="php/ingreso/guardar.php?accion=editar1&id=<?php echo $fila['id']; ?>">
 								<?php echo $fila['cc_invitado1']. "<br><hr>" . $fila['invitado1'] ;     ?>
 								
 							</a>
 							<?php echo "<br><hr>" . $fila['est_inv1']  ;    ?>
 						</td>
-						<td>
+						<td style="background-color: <?php echo ($fila['est_inv2'] == 'Presente') ? '#ed969e' : ''; ?>;">
 							<a href="php/ingreso/guardar.php?accion=editar2&id=<?php echo $fila['id']; ?>">
 								<?php echo $fila['cc_invitado2']. "<br><hr>" . $fila['invitado2'] ;    ?>
 								
 							</a>
 							<?php echo "<br><hr>" . $fila['est_inv2']  ;    ?>
 						</td>
-						<td><?php echo $fila['estado'];     ?></td>
+						<td style="background-color: <?php echo ($fila['estado'] == 'Presente') ? '#ed969e' : ''; ?>;"><?php echo $fila['estado'];     ?></td>
 
 						
 					</tr>

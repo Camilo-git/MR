@@ -34,95 +34,95 @@ class ingreso
     }
 
     //definimos los metodos set y get para cada campo de la clase
-    public function setid($id)
-    {
-        $this->id=$id;
-    }
-    
-    public function setinvitado($invitado)
-    {
-        $this->invitado=$invitado;
-    }
+        public function setid($id)
+        {
+            $this->id=$id;
+        }
+        
+        public function setinvitado($invitado)
+        {
+            $this->invitado=$invitado;
+        }
 
-    public function setcc_invitado($cc_invitado)
-    {
-        $this->cc_invitado=$cc_invitado;
-    }
+        public function setcc_invitado($cc_invitado)
+        {
+            $this->cc_invitado=$cc_invitado;
+        }
 
-    public function setinvitado1($invitado1)
-    {
-        $this->invitado1=$invitado1;
-    }
+        public function setinvitado1($invitado1)
+        {
+            $this->invitado1=$invitado1;
+        }
 
-    public function setcc_invitado1($cc_invitado1)
-    {
-        $this->cc_invitado1=$cc_invitado1;
-    }
+        public function setcc_invitado1($cc_invitado1)
+        {
+            $this->cc_invitado1=$cc_invitado1;
+        }
 
-    public function setinvitado2($invitado2)
-    {
-        $this->invitado2=$invitado2;
-    }
+        public function setinvitado2($invitado2)
+        {
+            $this->invitado2=$invitado2;
+        }
 
-    public function setcc_invitado2($cc_invitado2)
-    {
-        $this->cc_invitado2=$cc_invitado2;
-    }
+        public function setcc_invitado2($cc_invitado2)
+        {
+            $this->cc_invitado2=$cc_invitado2;
+        }
 
-    public function setnovedad($novedad)
-    {
-        $this->novedad=$novedad;
-    }
+        public function setnovedad($novedad)
+        {
+            $this->novedad=$novedad;
+        }
 
-    public function setestado($estado)
-    {
-        $this->estado=$estado;
-    }
+        public function setestado($estado)
+        {
+            $this->estado=$estado;
+        }
 
-    public function getid()
-    {
-        return $this->id;
-    }
+        public function getid()
+        {
+            return $this->id;
+        }
 
-    public function getinvitado()
-    {
-        return $this->invitado;
-    }
+        public function getinvitado()
+        {
+            return $this->invitado;
+        }
 
-    public function getcc_invitado()
-    {
-        return $this->cc_invitado;
-    }
+        public function getcc_invitado()
+        {
+            return $this->cc_invitado;
+        }
 
-    public function getinvitado1()
-    {
-        return $this->invitado1;
-    }
+        public function getinvitado1()
+        {
+            return $this->invitado1;
+        }
 
-    public function getcc_invitado1()
-    {
-        return $this->cc_invitado1;
-    }   
+        public function getcc_invitado1()
+        {
+            return $this->cc_invitado1;
+        }   
 
-    public function getinvitado2()
-    {
-        return $this->invitado2;
-    }   
+        public function getinvitado2()
+        {
+            return $this->invitado2;
+        }   
 
-    public function getcc_invitado2()
-    {
-        return $this->cc_invitado2;
-    }
+        public function getcc_invitado2()
+        {
+            return $this->cc_invitado2;
+        }
 
-    public function getnovedad()
-    {
-        return $this->novedad;
-    }
+        public function getnovedad()
+        {
+            return $this->novedad;
+        }
 
-    public function getestado()
-    {
-        return $this->estado;
-    }
+        public function getestado()
+        {
+            return $this->estado;
+        }
 
  //METODOS CRU CREATE,READ,UPDATE,DELETE
    /*--------------------------------------------------------------------------
