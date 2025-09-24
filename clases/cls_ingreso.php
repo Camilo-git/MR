@@ -2,127 +2,49 @@
 // incluimos la base de datos
 include_once("cls_conectarBD.php");
 
+
+/**
+ * Clase ingreso
+ * Representa un registro de ingreso con hasta 3 invitados y su información asociada.
+ */
 class ingreso
 {
-    //se define la variable para manejar todos los campos de la clase
-    public $id;    
-    public $invitado;
-    public $cc_invitado;
-    public $invitado1;
-    public $cc_invitado1;
-    public $invitado2;
-    public $cc_invitado2;
-    public $novedad;
-    public $estado;
+    // Propiedades públicas que representan los campos de la tabla 'registro'
+    public $id;            // int: Identificador único del registro
+    public $invitado;      // string: Nombre del invitado principal
+    public $cc_invitado;   // string: Cédula del invitado principal
+    public $invitado1;     // string: Nombre del segundo invitado (opcional)
+    public $cc_invitado1;  // string: Cédula del segundo invitado (opcional)
+    public $invitado2;     // string: Nombre del tercer invitado (opcional)
+    public $cc_invitado2;  // string: Cédula del tercer invitado (opcional)
+    public $novedad;       // string: Observaciones o novedades
+    public $estado;        // string: Estado del registro
 
-  
-
-    //metodo para cargar los datos de la clase
-    public function cargar($id, $invitado, $cc_invitado, $invitado1, $cc_invitado1, $invitado2, $cc_invitado2, $novedad, $estado)
-    
+    /**
+     * Constructor para inicializar los campos del registro.
+     * Todos los parámetros son opcionales.
+     */
+    public function __construct($id = null, $invitado = null, $cc_invitado = null, $invitado1 = null, $cc_invitado1 = null, $invitado2 = null, $cc_invitado2 = null, $novedad = null, $estado = null)
     {
-        $this->id=$id;      
-        $this->invitado=$invitado;
-        $this->cc_invitado=$cc_invitado;
-        $this->invitado1=$invitado1;
-        $this->cc_invitado1=$cc_invitado1;
-        $this->invitado2=$invitado2;
-        $this->cc_invitado2=$cc_invitado2;
-        $this->novedad=$novedad;
-        $this->estado=$estado;
-
+        $this->id = $id;
+        $this->invitado = $invitado;
+        $this->cc_invitado = $cc_invitado;
+        $this->invitado1 = $invitado1;
+        $this->cc_invitado1 = $cc_invitado1;
+        $this->invitado2 = $invitado2;
+        $this->cc_invitado2 = $cc_invitado2;
+        $this->novedad = $novedad;
+        $this->estado = $estado;
     }
 
-    //definimos los metodos set y get para cada campo de la clase
-        public function setid($id)
-        {
-            $this->id=$id;
-        }
-        
-        public function setinvitado($invitado)
-        {
-            $this->invitado=$invitado;
-        }
-
-        public function setcc_invitado($cc_invitado)
-        {
-            $this->cc_invitado=$cc_invitado;
-        }
-
-        public function setinvitado1($invitado1)
-        {
-            $this->invitado1=$invitado1;
-        }
-
-        public function setcc_invitado1($cc_invitado1)
-        {
-            $this->cc_invitado1=$cc_invitado1;
-        }
-
-        public function setinvitado2($invitado2)
-        {
-            $this->invitado2=$invitado2;
-        }
-
-        public function setcc_invitado2($cc_invitado2)
-        {
-            $this->cc_invitado2=$cc_invitado2;
-        }
-
-        public function setnovedad($novedad)
-        {
-            $this->novedad=$novedad;
-        }
-
-        public function setestado($estado)
-        {
-            $this->estado=$estado;
-        }
-
-        public function getid()
-        {
-            return $this->id;
-        }
-
-        public function getinvitado()
-        {
-            return $this->invitado;
-        }
-
-        public function getcc_invitado()
-        {
-            return $this->cc_invitado;
-        }
-
-        public function getinvitado1()
-        {
-            return $this->invitado1;
-        }
-
-        public function getcc_invitado1()
-        {
-            return $this->cc_invitado1;
-        }   
-
-        public function getinvitado2()
-        {
-            return $this->invitado2;
-        }   
-
-        public function getcc_invitado2()
-        {
-            return $this->cc_invitado2;
-        }
-
-        public function getnovedad()
-        {
-            return $this->novedad;
-        }
-
-        public function getestado()
-        {
-            return $this->estado;
-        }
+    /**
+     * Método para cargar los datos de la clase (opcional, por compatibilidad).
+     * Permite reasignar todos los campos del objeto.
+     */
+    public function cargar($id, $invitado, $cc_invitado, $invitado1, $cc_invitado1, $invitado2, $cc_invitado2, $novedad, $estado)
+    {
+        $this->__construct($id, $invitado, $cc_invitado, $invitado1, $cc_invitado1, $invitado2, $cc_invitado2, $novedad, $estado);
+    }
 
  //METODOS CRU CREATE,READ,UPDATE,DELETE
    /*--------------------------------------------------------------------------
@@ -132,42 +54,44 @@ class ingreso
 	 1: true -> La operaciòn se ejecutò con èxito
 	 2: false -> La operaciòn no se pudo ejecutar
 	 --------------------------------------------------------------------------*/
-     public function insertar()
-        {
-            //vatiable de trabajo
-            $resultado=false;
-            $filas = 0;
-            //creamos la conexion a la base de datos
-            $conexion = conectarBD();
-            //creamos la variable que contiene la sentencia sql
-            $sSQL = "INSERT INTO registro VALUES (?,?,?,?,?,?,?,?,?)";
-            //PrepareStatement es el que transporta los datos a la base de datos y los trae de vuelta
-            try {
-                $pst = $conexion->prepare($sSQL);
-                $pst->bind_param(1, $this->id);
-                $pst->bind_param(2, $this->invitado);
-                $pst->bind_param(3, $this->cc_invitado);
-                $pst->bind_param(4, $this->invitado1);
-                $pst->bind_param(5, $this->cc_invitado1);
-                $pst->bind_param(6, $this->invitado2);
-                $pst->bind_param(7, $this->cc_invitado2);
-                $pst->bind_param(8, $this->novedad);
-                $pst->bind_param(9, $this->estado);
-                $filas = $pst->execute();
-                if ($filas > 0) {
-                    $resultado = true;
-                } else {
-                    $resultado = false;
-                }
-            } catch (Exception $e) {
-                echo "No se pudo realizar la conexión a la Base de Datos";
-                echo "<br>";
-                echo "Error:" . $e->getMessage();
-                $resultado = false;            
-
+    /**
+     * Inserta el registro actual en la base de datos.
+     * @return bool true si la operación fue exitosa, false en caso contrario.
+     */
+    public function insertar()
+    {
+        $resultado = false;
+        $conexion = conectarBD();
+        // Insertar explícitamente columnas: id es AUTO_INCREMENT
+        $sSQL = "INSERT INTO registro (invitado, cc_invitado, invitado1, cc_invitado1, invitado2, cc_invitado2, novedad, estado, est_inv1, est_inv2) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        try {
+            $stmt = $conexion->prepare($sSQL);
+            if (!$stmt) {
+                throw new Exception("Error en prepare: " . implode(" - ", $conexion->errorInfo()));
             }
-            return $resultado;
-        }//fin del metodo insertar
+            // Valores por defecto: estado y estado de invitados inician como 'Aucente'
+            $estado = $this->estado ?? 'Aucente';
+            $est_inv1 = 'Aucente';
+            $est_inv2 = 'Aucente';
+            $params = [
+                $this->invitado,
+                $this->cc_invitado,
+                $this->invitado1,
+                $this->cc_invitado1,
+                $this->invitado2,
+                $this->cc_invitado2,
+                $this->novedad,
+                $estado,
+                $est_inv1,
+                $est_inv2
+            ];
+            $resultado = $stmt->execute($params);
+        } catch (Exception $e) {
+            error_log("Error al insertar (PDO): " . $e->getMessage());
+            $resultado = false;
+        }
+        return $resultado;
+    }
 
      /*--------------------------------------------------------------------------
 	 Function modificar()
@@ -176,14 +100,14 @@ class ingreso
 	 1: true -> La operaciòn se ejecutò con èxito
 	 2: false -> La operaciòn no se pudo ejecutar
 	 --------------------------------------------------------------------------*/
-     public function modificar()
-     {
-        //variable de trabajo
-        $resultado=false;
-        $filas=0;
-        //creamos la conexion a la base de datos
+    /**
+     * Modifica el registro actual en la base de datos según su id.
+     * @return bool true si la operación fue exitosa, false en caso contrario.
+     */
+    public function modificar()
+    {
+        $resultado = false;
         $conexion = conectarBD();
-        //creamos la variable que contiene la sentencia sql
         $sSQL = "UPDATE registro SET
             invitado = ?,
             cc_invitado = ?,
@@ -194,31 +118,28 @@ class ingreso
             novedad = ?,
             estado = ?
             WHERE id = ?";
-        //PrepareStatement es el que transporta los datos a la base de datos y los trae de vuelta
         try {
-            $pst = $conexion->prepare($sSQL);
-            $pst->bind_param(1, $this->invitado);
-            $pst->bind_param(2, $this->cc_invitado);
-            $pst->bind_param(3, $this->invitado1);
-            $pst->bind_param(4, $this->cc_invitado1);
-            $pst->bind_param(5, $this->invitado2);
-            $pst->bind_param(6, $this->cc_invitado2);
-            $pst->bind_param(7, $this->novedad);
-            $pst->bind_param(8, $this->estado);
-            $pst->bind_param(9, $this->id);
-            $filas = $pst->execute();
-            if ($filas > 0) {
-                $resultado = true;
-            } else {
-                $resultado = false;
+            $stmt = $conexion->prepare($sSQL);
+            if (!$stmt) {
+                throw new Exception("Error en prepare: " . implode(" - ", $conexion->errorInfo()));
             }
+            $params = [
+                $this->invitado,
+                $this->cc_invitado,
+                $this->invitado1,
+                $this->cc_invitado1,
+                $this->invitado2,
+                $this->cc_invitado2,
+                $this->novedad,
+                $this->estado,
+                $this->id
+            ];
+            $resultado = $stmt->execute($params);
         } catch (Exception $e) {
-            echo "No se pudo realizar la conexión a la Base de Datos";
-            echo "<br>";
-            echo "Error:" . $e->getMessage();
-            $resultado = false;            
-
-        }//fin del metodo modificar
+            error_log("Error al modificar (PDO): " . $e->getMessage());
+            $resultado = false;
+        }
+        return $resultado;
     }
 
 

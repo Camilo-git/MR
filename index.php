@@ -17,7 +17,19 @@
       </head>
       <body>
         <div class="container my-4">
-          <?php include_once("inc/encabezado.inc"); ?>   
+      <?php include_once("inc/encabezado.inc"); ?>  
+
+      <?php
+      // Mostrar alerta si venimos de una creación (guardar.php redirige con creado=1|0)
+      if (isset($_GET['creado'])) {
+        $creado = $_GET['creado'] === '1';
+        if ($creado) {
+          echo '<div class="alert alert-success alert-dismissible fade show" role="alert">Registro creado correctamente.<button type="button" class="close" data-dismiss="alert" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button></div>';
+        } else {
+          echo '<div class="alert alert-danger alert-dismissible fade show" role="alert">No se pudo crear el registro. Revisa los datos e intenta de nuevo.<button type="button" class="close" data-dismiss="alert" aria-label="Cerrar"><span aria-hidden="true">&times;</span></button></div>';
+        }
+      }
+      ?>
       
 
         <div class="container-fluid">

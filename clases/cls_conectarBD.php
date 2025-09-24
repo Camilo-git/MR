@@ -1,27 +1,44 @@
 <?php
-// creamos la funcion conectarBD
-function conectarBD(){
-    // declaramos las variables
+/**
+ * Establece una conexión PDO a la base de datos MySQL.
+ * @return PDO Objeto de conexión listo para usar.
+ * @throws PDOException Si ocurre un error de conexión.
+ */
+function conectarBD() {
+    // Parámetros de conexión
     $servidor = "localhost";
     $usuario = "root";
     $password = "";
+    /**
+     * Nombre de la base de datos utilizada en la aplicación.
+     * Cambia este valor si tu base de datos tiene otro nombre.
+     * @var string
+     */
     $bd = "registro_db";
 
-    // realizamos la coneccion con try catch
     try {
-        $conexion = new PDO("mysql:host=$servidor;dbname=$bd", $usuario, $password);
-        $conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        // Crear nueva conexión PDO
+        $conexion = new PDO(
+            "mysql:host=$servidor;dbname=$bd;charset=utf8mb4",
+            $usuario,
+            $password,
+            [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION]
+        );
         return $conexion;
     } catch (PDOException $e) {
-        echo 'No se pudo realizar la conexión a la base de datos';
-  	    echo '<br>';
-  	    echo 'Error: '.$e->getMessage();
-  	    exit();
+        // Registrar el error y lanzar excepción para manejo superior
+        error_log('Error de conexión BD: ' . $e->getMessage());
+        throw new Exception('No se pudo conectar a la base de datos.');
     }
 }
-function desconectarBD($conexion)
+
+/**
+ * Cierra la conexión PDO (opcional, por compatibilidad).
+ * @param PDO|null $conexion
+ */
+function desconectarBD(&$conexion)
 {
-  $conexion = null;
+    $conexion = null;
 }
 
 ?>
