@@ -1,0 +1,9 @@
+creamos la aplicacion 
+
+creamos la rama de mejora1 con la necesidad que se requiere un tercer acompañante para la graduacion 
+ralizmos un analicis para ver si es viable la mejora
+vemos que se requiere mejorar la base de datos para mejorar su logica y cumpla su proposito
+
+1. en el momento en que se llena el fomulario google tienen que llenar los campos completamente
+2. aquel estudiante que no llene el formulario no sera visible ante la base de datos,
+    toca tener en cuenta la resolucion de graduados para su revision de grado

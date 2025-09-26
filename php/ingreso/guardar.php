@@ -60,25 +60,27 @@ function editar2($id)
     //redireccionamos a la pagina principal
     header("Location: ../../index.php");
 }
-//creamos una funcion la cual vesifique si el est_inv1 y el est_inv2 estan en "Presente"
+//creamos una funcion pata editar el est_inv3
+function editar3($id)
+{
+    include_once("../../clases/cls_conectarBD.php");
+    $conexion = conectarBD();
+    $sSQL = "UPDATE registro SET est_inv3='Presente' WHERE id=" . $id;
+    $conexion->query($sSQL);
+    desconectarBD($conexion);
+    header("Location: ../../index.php");
+}
+//creamos una funcion la cual vesifique si el est_inv1, est_inv2 y est_inv3 estan en "Presente"
 //si es asi cambia el campo estado a "Presente"
 function editar($id)
 {
-    //incluimos la conexion a la base de datos
     include_once("../../clases/cls_conectarBD.php");
-    //creamos la conexion a la base de datos
     $conexion = conectarBD();
-    //creamos la consulta para traer los campos est_inv1 y est_inv2
-    $sSQL = "SELECT est_inv1, est_inv2 FROM registro WHERE id=" . $id;
-    //ejecutamos la consulta
+    $sSQL = "SELECT est_inv1, est_inv2, est_inv3 FROM registro WHERE id=" . $id;
     $datos = $conexion->query($sSQL);
-    //recorremos los datos
     foreach ($datos as $fila) {
-        //verificamos si est_inv1 y est_inv2 estan en "Presente"
-        if ($fila['est_inv1'] == "Presente" && $fila['est_inv2'] == "Presente") {
-            //si es asi cambiamos el campo estado a "Presente"
+        if ($fila['est_inv1'] == "Presente" && $fila['est_inv2'] == "Presente" && $fila['est_inv3'] == "Presente") {
             $sSQL = "UPDATE registro SET estado='Presente' WHERE id=" . $id;
-            //ejecutamos la consulta
             $conexion->query($sSQL);
         }
     }
@@ -86,21 +88,23 @@ function editar($id)
 
 if ($accion == "editar") {
     //ejecutamos las dos funciones editar1 y editar2
-    
     editar1($id);
     editar2($id);
+    editar3($id);
     editar($id);
 
 }elseif ($accion == "editar1") {
-    
     //ejecutamos la funcion editar y editar1       
     editar1($id);
     editar($id);
 
 }elseif ($accion == "editar2") {
-    
     //ejecutamos la funcion editar y editar2    
     editar2($id);
+    editar($id);
+
+}elseif ($accion == "editar3") {
+    editar3($id);
     editar($id);
 
 }
